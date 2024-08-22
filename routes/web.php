@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserManagementController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,7 +23,5 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/user-management', function () {
-        return Inertia::render('UserManagement');
-    })->name('user.management');
+    Route::resource('manajemen-pengguna', UserManagementController::class);
 });
