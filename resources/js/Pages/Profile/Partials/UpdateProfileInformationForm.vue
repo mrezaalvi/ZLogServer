@@ -130,7 +130,7 @@ const clearPhotoFileInput = () => {
 
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="name" value="Nama" />
+                <InputLabel for="name" value="Name" />
                 <TextInput
                     id="name"
                     v-model="form.name"
@@ -157,7 +157,7 @@ const clearPhotoFileInput = () => {
 
                 <div v-if="$page.props.jetstream.hasEmailVerification && user.email_verified_at === null">
                     <p class="text-sm mt-2">
-                        Alamat email Anda belum diverifikasi.
+                        Your email address is unverified.
 
                         <Link
                             :href="route('verification.send')"
@@ -166,7 +166,7 @@ const clearPhotoFileInput = () => {
                             class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             @click.prevent="sendEmailVerification"
                         >
-                            Klik di sini untuk mengirim ulang email verifikasi.
+                            Click here to re-send the verification email.
                         </Link>
                     </p>
 
