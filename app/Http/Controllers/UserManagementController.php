@@ -42,9 +42,29 @@ class UserManagementController extends Controller
         return redirect()->route('manajemen-pengguna.index');
     }
 
+    public function edit(User $manajemen_pengguna)
+    {
+        return Inertia::render('UserManagement/Edit', compact('manajemen_pengguna'));
+    }
+
+    public function update(User $manajemen_pengguna, Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$manajemen_pengguna->id,
+        ]);
+
+        $manajemen_pengguna->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+            
+        return redirect()->route('manajemen-pengguna.index'); 
+    }
+
     public function destroy(User $manajemen_pengguna)
     {
         $manajemen_pengguna->delete();
-        return redirect()->back();
+        return redirect()->route('manajemen-pengguna.index'); 
     }
 }
