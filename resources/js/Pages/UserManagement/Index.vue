@@ -6,6 +6,7 @@
         users: {
             type: Array,
             default: () => [],
+            
         },
     });
 
@@ -37,7 +38,7 @@
                         Buat
                     </Link>
                 </div>
-                <div class="bg-white overflow-hidden shadow sm:rounded-lg p-6">
+                <div class="bg-white overflow-hidden shadow sm:rounded-lg">
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
@@ -58,13 +59,10 @@
                                     </td>
                                     <td class="w-px px-6 py-4 whitespace-nowrap">
                                         <div class="flex space-x-4">
-                                            <a href="#" class="text-blue-600 font-medium hover:text-blue-700 hover:underline">
-                                                View
-                                            </a>
-                                            <a href="#" class="text-green-600 font-medium hover:text-green-700 hover:underline">
+                                            <a href="#" class="text-sm text-green-600 font-medium hover:text-green-700 hover:underline">
                                                 Edit
                                             </a>
-                                            <button @click="deleteUser(user.id)" class="text-red-600 font-medium hover:text-red-700 hover:underline">
+                                            <button @click="deleteUser(user.id)" class="text-sm text-red-600 font-medium hover:text-red-700 hover:underline">
                                                 Delete
                                             </button>
                                         </div>
