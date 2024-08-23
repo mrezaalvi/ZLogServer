@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class UserManagementController extends Controller
 {
     public function index()
     {
         $users = User::whereNot(function(Builder $query){
-            $query->where('email','admin@example.com');
+            $query->where('email','admin@example.com')
+                ->orWhere('email', Auth::user()->email);
         })->get();
         return Inertia::render('UserManagement/Index', ['users' => $users]);
     }
@@ -24,8 +26,19 @@ class UserManagementController extends Controller
 
     public function store(Request $request)
     {
-        $user = new User($request->all());
-        $user->save();
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = User::firstOrCreate(
+            ['email' => $request->email],
+            [
+                'name' => $request->name,
+                'password' => $request->password,
+            ]
+        );
         return redirect()->route('manajemen-pengguna.index');
     }
 
